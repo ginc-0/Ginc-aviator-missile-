@@ -7,13 +7,8 @@ let allowWin = false;
 function toggleForm() {
   const login = document.getElementById("loginForm");
   const signup = document.getElementById("signupForm");
-  if (login.style.display === "none") {
-    login.style.display = "block";
-    signup.style.display = "none";
-  } else {
-    login.style.display = "none";
-    signup.style.display = "block";
-  }
+  login.style.display = login.style.display === "none" ? "block" : "none";
+  signup.style.display = signup.style.display === "none" ? "block" : "none";
 }
 
 function signup() {
@@ -37,27 +32,35 @@ function login() {
   const storedPass = localStorage.getItem(user);
 
   if (storedPass && storedPass === pass) {
-    startGame();
+    document.getElementById("authScreen").style.display = "none";
+    document.getElementById("startScreen").style.display = "block";
   } else {
     alert("Wrong credentials.");
   }
 }
 
 function startGame() {
-  document.getElementById("authScreen").style.display = "none";
+  const bet = document.getElementById("betAmount").value;
+  if (!bet || bet <= 0) {
+    alert("Please enter a valid bet amount.");
+    return;
+  }
+
+  document.getElementById("startScreen").style.display = "none";
   document.getElementById("gameScreen").style.display = "block";
 
   multiplier = 1.00;
   document.getElementById("counter").innerText = multiplier.toFixed(2) + "x";
   document.getElementById("missile").classList.remove("explode");
   document.getElementById("result").innerText = "";
+  document.getElementById("tryAgainBtn").style.display = "none";
   isGameOver = false;
 
-  allowWin = Math.random() < 0.20; // 20% chance to win
+  allowWin = Math.random() < 0.20;
 
   shotTime = allowWin
-    ? 5000 + Math.random() * 2000  // Win: longer flight
-    : 1500 + Math.random() * 1500; // Lose: short flight
+    ? 5000 + Math.random() * 2000
+    : 1500 + Math.random() * 1500;
 
   interval = setInterval(() => {
     multiplier += 0.01;
@@ -68,6 +71,7 @@ function startGame() {
     if (!isGameOver) {
       document.getElementById("missile").classList.add("explode");
       document.getElementById("result").innerText = "💥 Shot down! You lost.";
+      document.getElementById("tryAgainBtn").style.display = "inline-block";
       clearInterval(interval);
       isGameOver = true;
     }
@@ -83,5 +87,11 @@ function cashOut() {
     clearInterval(interval);
     document.getElementById("result").innerText = `✅ You cashed out at ${multiplier.toFixed(2)}x`;
   }
+  document.getElementById("tryAgainBtn").style.display = "inline-block";
   isGameOver = true;
+}
+
+function resetGame() {
+  document.getElementById("gameScreen").style.display = "none";
+  document.getElementById("startScreen").style.display = "block";
 }

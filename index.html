@@ -27,12 +27,20 @@
     </div>
   </div>
 
+  <!-- START SCREEN -->
+  <div id="startScreen" style="display:none;">
+    <h2>💰 Place Your Bet</h2>
+    <input type="number" id="betAmount" placeholder="Enter bet amount" />
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
   <!-- GAME SCREEN -->
   <div id="gameScreen" style="display: none;">
     <div class="missile" id="missile"></div>
     <div class="counter" id="counter">1.00x</div>
     <button id="cashoutBtn" onclick="cashOut()">Cash Out</button>
     <p id="result"></p>
+    <button id="tryAgainBtn" onclick="resetGame()" style="display:none;">Try Again</button>
   </div>
 
   <script src="script.js"></script>
