@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aviator Missile Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- LOGIN SCREEN -->
+  <div id="authScreen">
+    <div id="loginForm">
+      <h2>🚀 Missile Game Login</h2>
+      <input type="text" id="loginUsername" placeholder="Username" />
+      <input type="password" id="loginPassword" placeholder="Password" />
+      <button onclick="login()">Login</button>
+      <p>New here? <a href="#" onclick="toggleForm()">Sign up</a></p>
+    </div>
+
+    <div id="signupForm" style="display:none;">
+      <h2>📝 Create Account</h2>
+      <input type="text" id="signupUsername" placeholder="Username" />
+      <input type="password" id="signupPassword" placeholder="Password" />
+      <input type="password" id="signupConfirm" placeholder="Confirm Password" />
+      <button onclick="signup()">Create Account</button>
+      <p>Already have an account? <a href="#" onclick="toggleForm()">Login</a></p>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="gameScreen" style="display: none;">
+    <div class="missile" id="missile"></div>
+    <div class="counter" id="counter">1.00x</div>
+    <button id="cashoutBtn" onclick="cashOut()">Cash Out</button>
+    <p id="result"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
